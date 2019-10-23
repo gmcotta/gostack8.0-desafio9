@@ -1,13 +1,36 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+// import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { Container } from './styles';
-
+import { updateProfileRequest } from '~/store/modules/user/actions';
+/*
+const schema = Yup.object().shape({
+  name: Yup.string(),
+  email: Yup.string().required('E-mail is required.'),
+  oldPassword: Yup.string().min(
+    6,
+    'Password should have at least 6 characters.'
+  ),
+  password: Yup.string().when('oldPassword', (oldPassword, field) =>
+    oldPassword ? field.required('New password is required.') : field
+  ),
+  confirmPassword: Yup.string().when('password', (password, field) =>
+    password
+      ? field.required().oneOf([Yup.ref('password')], 'Confirm the password')
+      : field
+  ),
+});
+*/
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
+  const dispatch = useDispatch();
 
-  function handleSubmit(data) {}
+  function handleSubmit(data) {
+    dispatch(updateProfileRequest(data));
+    console.tron.log(data);
+  }
 
   return (
     <Container>
@@ -18,7 +41,7 @@ export default function Profile() {
         <Input type="password" name="oldPassword" placeholder="Old password" />
         <Input type="password" name="password" placeholder="New password" />
         <Input
-          type="confirmPassword"
+          type="password"
           name="confirmPassword"
           placeholder="Confirm new password"
         />

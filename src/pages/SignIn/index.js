@@ -8,11 +8,11 @@ import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Enter a valid e-mail')
-    .required('E-mail is required'),
+    .email('Enter a valid e-mail.')
+    .required('E-mail is required.'),
   password: Yup.string()
-    .min(6, 'Password should have at least 6 characters')
-    .required('Password is required'),
+    .min(6, 'Password should have at least 6 characters.')
+    .required('Password is required.'),
 });
 
 export default function SignIn() {
